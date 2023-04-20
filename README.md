@@ -21,7 +21,7 @@ If you want more modules, please create an issue or create a pull request.
 2. Clone the repository
 
 ```
-git clone 
+git clone https://github.com/sxSoftwar3/sxRPTils.git
 ```
 
 3. Install the required gems
