@@ -5,6 +5,7 @@ require 'artii'
 require 'terminal-table'
 require 'net/http'
 require 'json'
+require 'time'
 
 # lookup modules
 
@@ -183,6 +184,72 @@ def osintsherlock
     end
 end
 
+def osintsaveinfo
+    puts ""
+    puts "Welcome to the saveinfo module!\nIn this module gathered information by osint will be saved into file"
+    puts "Enter target nickname:"
+    print " > "
+    target = gets.chomp
+    puts "Enter target name:"
+    print " > "
+    name = gets.chomp
+    puts "Enter target surname:"
+    print " > "
+    surname = gets.chomp
+    puts "Enter target age:"
+    print " > "
+    age = gets.chomp
+    puts "Enter target phone number:"
+    print " > "
+    phone = gets.chomp
+    puts "Enter target email:"
+    print " > "
+    email = gets.chomp
+    puts "Enter target photos url (separated by comma):"
+    print " > "
+    photos = gets.chomp
+    puts "Add sherlock social media results? (y/n)"
+    print " > "
+    sherlock = gets.chomp
+    if sherlock == "y"
+        puts "Enter sherlock results file path:"
+        print " > "
+        sherlockfile = gets.chomp
+    end
+    puts "Add your own notes? (y/n)"
+    print " > "
+    notes = gets.chomp
+    if notes == "y"
+        puts "Enter your notes:"
+        print " > "
+        notes = gets.chomp
+    end
+    puts "Enter file path to save info (for example /home/user/Desktop/):"
+    print " > "
+    filepath = gets.chomp
+    puts "Saving info..."
+    datee = Time.now.strftime("%d/%m/%Y %H:%M")
+    file = File.new("#{filepath}/#{target}.txt", "w")
+    file.puts("sxRPTils saveinfo module - Results #{datee}")
+    file.puts("===============================================")
+    file.puts("Target nickname: #{target}")
+    file.puts("Name: #{name}")
+    file.puts("Surname: #{surname}")
+    file.puts("Age: #{age}")
+    file.puts("Phone: #{phone}")
+    file.puts("Email: #{email}")
+    file.puts("Photos: #{photos}")
+    if sherlock == "y"
+        file.puts("Sherlock results: #{sherlockfile}")
+    end
+    if notes == "y"
+        file.puts("Notes: #{notes}")
+    end
+    file.puts("===============================================")
+    file.close
+    puts "Info saved!"
+end
+
 # misc modules
 def elpscrk
     if File.exist?('./scripts/elpscrk/elpscrk.py')
@@ -240,3 +307,6 @@ def elpscrkleet
         end
     end
 end
+
+
+        

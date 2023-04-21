@@ -108,6 +108,7 @@ end
 def osintmodules
     rows = []
     rows << ['osint.sherlock', 'Search for username on social media']
+    rows << ['osint.saveinfo', 'Save information about target to file']
     table = Terminal::Table.new :title => 'OSINT Modules', :headings => ['Command', 'Description'], :rows => rows
     puts table
     puts ""
@@ -271,6 +272,8 @@ loop do
                 break
             elsif cmd == "osint.sherlock"
                 osintsherlock
+            elsif cmd == "osint.saveinfo"
+                osintsaveinfo
             elsif cmd == "clear"
                 print "\e[2J\e[f"
             else
