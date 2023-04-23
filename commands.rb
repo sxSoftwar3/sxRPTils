@@ -250,6 +250,60 @@ def osintsaveinfo
     puts "Info saved!"
 end
 
+def theharvester
+    # check if theharvester is installed
+    if File.exist?('/usr/bin/theharvester')
+        puts "Enter target domain"
+        print " > "
+        domain = gets.chomp
+        puts "Enter output file path"
+        print " > "
+        output = gets.chomp
+        puts "Starting theharvester..."
+        system("theharvester -d #{domain} -b all -f #{output}")
+    else
+        puts "Theharvester not found. Do you want to install it? (y/n)"
+        print " > "
+        install = gets.chomp
+        if install == "y"
+            puts "Do you want to install theharvester from apt or from github? (apt/github)"
+            print " > "
+            source = gets.chomp
+            if source == "apt"
+                puts "Installing theharvester..."
+                system("sudo apt install theharvester")
+                puts "Theharvester installed!"
+                puts "Use the command again to use theharvester"
+            elsif source == "github"
+                puts "Installing theharvester..."
+                system("git clone https://github.com/laramies/theHarvester.git ./scripts/theharvester")
+                system("cd ./scripts/theharvester && sudo python3 setup.py install")
+                puts "Theharvester installed!"
+                puts "Use the command again to use theharvester"
+        else
+            puts "Exiting..."
+        end
+    end
+end
+
+def osintgram
+    if File.exist?("./scripts/Osintgram/main.py")
+        system("python3 ./scripts/Osintgram/main.py")
+    else
+        puts "Osintgram not found. Do you want to install it? (y/n)"
+        print " > "
+        install = gets.chomp
+        if install == "y"
+            puts "Installing Osintgram..."
+            system("git clone https://github.com/Datalux/Osintgram.git ./scripts/Osintgram")
+            puts "Osintgram installed!"
+            puts "Use the command again to use Osintgram"
+        else
+            puts "Exiting..."
+        end
+    end
+end
+
 # misc modules
 def elpscrk
     if File.exist?('./scripts/elpscrk/elpscrk.py')

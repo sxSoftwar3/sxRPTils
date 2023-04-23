@@ -109,6 +109,7 @@ def osintmodules
     rows = []
     rows << ['osint.sherlock', 'Search for username on social media']
     rows << ['osint.saveinfo', 'Save information about target to file']
+    rows << ['osint.theharvester', 'Search for emails, subdomains and names']
     table = Terminal::Table.new :title => 'OSINT Modules', :headings => ['Command', 'Description'], :rows => rows
     puts table
     puts ""
@@ -274,6 +275,10 @@ loop do
                 osintsherlock
             elsif cmd == "osint.saveinfo"
                 osintsaveinfo
+            elsif cmd == "osint.theharvester"
+                theharvester
+            elsif cmd == "osint.osintgram"
+                osintgram
             elsif cmd == "clear"
                 print "\e[2J\e[f"
             else
