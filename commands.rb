@@ -252,7 +252,7 @@ end
 
 def theharvester
     # check if theharvester is installed
-    if File.exist?('/usr/bin/theharvester')
+    if File.exist?('/usr/bin/theharvester') || File.exist?('./scripts/theharvester/theHarvester.py')
         puts "Enter target domain"
         print " > "
         domain = gets.chomp
